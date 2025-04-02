@@ -16,10 +16,11 @@ MCP Server for the Email.
                 "email-mcp"
             ],
             "env": {
-                "EMAIL_HOST": <your SMTP server>,
-                "EMAIL_PORT": <your SMTP port>,
-                "EMAIL_ACCOUNT": <your email account>,
-                "EMAIL_PASSWORD": <password or app password>
+                "EMAIL_HOST": "<your SMTP server>",
+                "EMAIL_PORT": "<your SMTP port>",
+                "EMAIL_SSL": "<true or false>",
+                "EMAIL_ACCOUNT": "<your email account>",
+                "EMAIL_PASSWORD": "<password or app password>"
             }
         }
     }
