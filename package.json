@@ -1,8 +1,7 @@
 {
   "name": "email-mcp-server",
-  "version": "1.0.3",
+  "version": "1.0.1",
   "description": "This is an MCP server designed to handle email communications, supporting multiple email protocols and features.",
-  "type": "module",
   "keywords": [
     "email mcp server"
   ],
@@ -10,7 +9,7 @@
   "license": "ISC",
   "main": "build/index.js",
   "bin": {
-    "mcp-email": "./build/index.js"
+    "mcp-email": "build/index.js"
   },
   "files": [
     "build"
@@ -18,20 +17,18 @@
   "scripts": {
     "dev": "tsx ./src/index.ts",
     "build": "tsc && chmod 755 build/index.js",
-    "build:watch": "tsc -w",
-    "start:build": "tsc -w",
-    "start:run": "nodemon ./build/app.js",
-    "start": "concurrently npm:start:*"
+    "build:watch": "tsc -w"
   },
   "devDependencies": {
     "@types/node": "^22.13.13",
+    "@types/nodemailer": "^6.4.17",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.7.0",
-    "@types/nodemailer": "^6.4.17",
-    "zod": "^3.24.2",
-    "dotenv": "^16.1.4"
+    "dotenv": "^16.1.4",
+    "nodemailer": "^6.10.0",
+    "zod": "^3.24.2"
   }
 }
