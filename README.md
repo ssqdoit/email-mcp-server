@@ -16,7 +16,7 @@ MCP Server for the Email.
             "command": "npx",
             "args": [
                 "-y",
-                "@doit/email-mcp-server"
+                "email-mcp-server"
             ],
             "env": {
                 "EMAIL_HOST": "Replace with your SMTP server",

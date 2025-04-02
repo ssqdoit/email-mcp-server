@@ -1,6 +1,6 @@
 {
   "name": "email-mcp-server",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "This is an MCP server designed to handle email communications, supporting multiple email protocols and features.",
   "main": "/src/index.js",
   "type": "module",
