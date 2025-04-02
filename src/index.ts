@@ -1,6 +1,8 @@
+#!/usr/bin/env node
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import nodemailer from "nodemailer";
 import { z } from "zod";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 // 创建服务器实例
 const email_server = new McpServer({
@@ -18,11 +20,16 @@ interface EmailOptions {
   text: string;
 }
 
+interface EmailResponse {
+  status: boolean;
+  message: string;
+}
+
 // 创建邮件传输器
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST ?? "smtp.gmail.com", // 替换为你的 SMTP 服务器
   port: process.env.EMAIL_PORT ?? 587,
-  secure: true,
+  secure: process.env.EMAIL_SSL === "true" ? true : false,
   auth: {
     user: process.env.EMAIL_ACCOUNT, // 替换为你的邮箱
     pass: process.env.EMAIL_PASSWORD, // 替换为你的密码或应用专用密码
@@ -30,7 +37,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // 发送邮件的辅助函数
-async function sendEmail(options: EmailOptions): Promise<boolean> {
+async function sendEmail(options: EmailOptions): Promise<EmailResponse> {
   try {
     await transporter.sendMail({
       from: process.env.EMAIL_ACCOUNT, // 替换为你的邮箱
@@ -38,10 +45,17 @@ async function sendEmail(options: EmailOptions): Promise<boolean> {
       subject: options.subject,
       text: options.text,
     });
-    return true;
+    return {
+      status: true,
+      message: "邮件发送成功",
+    };
   } catch (error) {
-    console.error("Error sending email:", error);
-    return false;
+    const errorMessage = (error as Error).message;
+    console.error("Error sending email:", errorMessage);
+    return {
+      status: false,
+      message: errorMessage,
+    };
   }
 }
 
@@ -66,17 +80,26 @@ email_server.tool(
       };
     }
 
-    const success = await sendEmail({ to, subject, text });
+    const response = await sendEmail({ to, subject, text });
 
     return {
       content: [
         {
           type: "text",
-          text: success ? "邮件发送成功" : "邮件发送失败",
+          text: response.message,
         },
       ],
     };
   }
 );
 
-export default email_server;
+async function runServer() {
+  const transport = new StdioServerTransport();
+  await email_server.connect(transport);
+  console.error("Email MCP Server running on stdio");
+}
+
+runServer().catch((error) => {
+  console.error("Fatal error running server:", error);
+  process.exit(1);
+});

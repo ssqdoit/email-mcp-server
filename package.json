@@ -1,6 +1,6 @@
 {
-  "name": "email-mcp-server",
-  "version": "1.0.1",
+  "name": "email-mcp",
+  "version": "0.0.6",
   "description": "This is an MCP server designed to handle email communications, supporting multiple email protocols and features.",
   "keywords": [
     "email mcp server"

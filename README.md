@@ -13,13 +13,13 @@ MCP Server for the Email.
             "command": "npx",
             "args": [
                 "-y",
-                "email-mcp-server"
+                "email-mcp"
             ],
             "env": {
-                "EMAIL_HOST": "Replace with your SMTP server",
-                "EMAIL_PORT": "Replace with your SMTP port",
-                "EMAIL_ACCOUNT": "Replace with your email account",
-                "EMAIL_PASSWORD": "Replace with your password or app-specific password"
+                "EMAIL_HOST": <your SMTP server>,
+                "EMAIL_PORT": <your SMTP port>,
+                "EMAIL_ACCOUNT": <your email account>,
+                "EMAIL_PASSWORD": <password or app password>
             }
         }
     }
