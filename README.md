@@ -4,9 +4,6 @@ MCP Server for the Email.
 
 ## Setup
 
-### Environment Variables
-
-
 ### NPX
 
 ```json
